@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.app.R
 import com.example.app.activity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
 
 class ForgetActivity : AppCompatActivity() {
 

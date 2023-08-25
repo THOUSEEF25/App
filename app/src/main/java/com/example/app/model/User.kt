@@ -7,5 +7,9 @@ data class User(
     val email: String = "",
     val phone: String = "",
     val address: String = "",
-    val followUpDate: String = ""
-) : Serializable
+    val followUpDate: String = "",
+    val planTo: String = "",
+    val description: String = ""
+) : Serializable {
+    var status: String = ""
+}
