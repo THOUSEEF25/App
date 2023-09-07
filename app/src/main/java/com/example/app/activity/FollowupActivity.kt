@@ -1,6 +1,5 @@
 package com.example.app.activity
 
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +19,6 @@ class FollowupActivity : AppCompatActivity() {
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var db: FirebaseFirestore
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFollowupBinding.inflate(layoutInflater)

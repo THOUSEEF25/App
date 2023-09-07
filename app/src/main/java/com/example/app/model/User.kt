@@ -11,6 +11,5 @@ data class User(
     var planTo: String = "",
     var description: String = ""
 ) : Serializable {
-    val documentId: String = ""
     var status: String = ""
 }

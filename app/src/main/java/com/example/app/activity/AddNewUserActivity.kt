@@ -102,7 +102,7 @@ class AddNewUserActivity : AppCompatActivity() {
             { _, selectedYear, selectedMonth, selectedDay ->
                 // Handle date selection here
                 val selectedDate = "${selectedMonth + 1}/$selectedDay/$selectedYear"
-                binding.followUpDateEditText.setText(selectedDate)
+                binding.planTo.setText(selectedDate)
             },
             year, month, day
         )

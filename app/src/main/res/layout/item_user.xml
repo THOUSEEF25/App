@@ -6,7 +6,8 @@
     android:background="@color/colorPrimary"
     android:id="@+id/listView"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:layout_marginVertical="2dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="120dp"

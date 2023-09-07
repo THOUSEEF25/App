@@ -13,7 +13,6 @@ class EditUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditUserBinding
     private lateinit var db: FirebaseFirestore
-    private lateinit var editUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +21,9 @@ class EditUserActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
 
-        // Retrieve the user data passed from the previous activity
-        editUser = intent.getSerializableExtra("editUser") as User
+        @Suppress("DEPRECATION")
+        val editUser = intent.getSerializableExtra("editUser") as User
 
-        // Populate the EditText fields with user's data
         binding.name.setText(editUser.name)
         binding.email.setText(editUser.email)
         binding.phone.setText(editUser.phone)
@@ -40,26 +38,39 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private fun updateData() {
-        // Get the edited data from EditText fields
-        val name = binding.name.text.toString()
-        val email = binding.email.text.toString()
-        val phone = binding.phone.text.toString()
-        val address = binding.address.text.toString()
-        val planTo = binding.planTo.text.toString()
-        val followUpDateEditText = binding.followUpDateEditText.text.toString()
-        val description = binding.description.text.toString()
 
-        // Update the user document in Firestore
-        val userRef = db.collection("users").document(editUser.documentId) // Use the correct document ID field
-        val updatedUser = User(name, email, phone, address, followUpDateEditText, planTo, description)
+        // Retrieve updated data from EditText fields
+        val name = binding.name.text.toString().trim()
+        val email = binding.email.text.toString().trim()
+        val phone = binding.phone.text.toString().trim()
+        val address = binding.address.text.toString().trim()
+        val planTo = binding.planTo.text.toString().trim()
+        val followUpDateEditText = binding.followUpDateEditText.text.toString().trim()
+        val description = binding.description.text.toString().trim()
 
-        userRef.set(updatedUser)
+        // Create a map with the updated data
+        val updatedData = mapOf(
+            "name" to name,
+            "email" to email,
+            "phone" to phone,
+            "address" to address,
+            "planTo" to planTo,
+            "followUpDate" to followUpDateEditText,
+            "description" to description
+        )
+
+        // Update data in Firestore
+        db.collection("users")
+            .document()
+            .update(updatedData)
             .addOnSuccessListener {
-                Toast.makeText(this, "User updated successfully", Toast.LENGTH_SHORT).show()
+                // Data updated successfully
+                Toast.makeText(this, "User updated", Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "Error updating user", Toast.LENGTH_SHORT).show()
+                // Handle update failure
+                Toast.makeText(this, "Update failed", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Error updating user", exception)
             }
     }
