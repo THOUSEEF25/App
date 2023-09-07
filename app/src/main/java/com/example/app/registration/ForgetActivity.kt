@@ -14,9 +14,7 @@ import com.google.firebase.auth.PhoneAuthCredential
 class ForgetActivity : AppCompatActivity() {
 
     private lateinit var emailEditText: EditText
-//    private lateinit var newPasswordEditText: EditText
     private lateinit var sendResetEmailButton: Button
-//    private lateinit var changePasswordButton: Button
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,9 +24,7 @@ class ForgetActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         emailEditText = findViewById(R.id.editTextEmail)
-//        newPasswordEditText = findViewById(R.id.editTextNewPassword)
         sendResetEmailButton = findViewById(R.id.buttonSendResetEmail)
-//        changePasswordButton = findViewById(R.id.buttonChangePassword)
 
         sendResetEmailButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -48,7 +44,6 @@ class ForgetActivity : AppCompatActivity() {
                     Toast.makeText(this, "Password reset email sent.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    // changePasswordButton.isEnabled = true
                 } else {
                     Toast.makeText(this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show()
                 }
