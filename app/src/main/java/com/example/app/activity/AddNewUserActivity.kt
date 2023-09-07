@@ -1,7 +1,6 @@
 package com.example.app.activity
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -9,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.app.databinding.ActivityAddNewUserBinding
 import com.example.app.model.User
 import com.google.firebase.firestore.FirebaseFirestore
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class AddNewUserActivity : AppCompatActivity() {
 
@@ -85,29 +82,13 @@ class AddNewUserActivity : AppCompatActivity() {
         val datePicker = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                showTimePickerDialog(selectedYear, selectedMonth, selectedDay)
+                // Handle date selection here
+                val selectedDate = "${selectedMonth + 1}/$selectedDay/$selectedYear"
+                binding.followUpDateEditText.setText(selectedDate)
             },
             year, month, day
         )
-
         datePicker.show()
-    }
-
-    private fun showTimePickerDialog(year: Int, month: Int, day: Int) {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        val timePicker = TimePickerDialog(
-            this,
-            { _, _, _ ->
-                val dateTime = "${month + 1}/$day/$year"
-                binding.followUpDateEditText.setText(dateTime)
-            },
-            hour, minute, false
-        )
-
-        timePicker.show()
     }
 
     private fun planTo() {
@@ -116,33 +97,15 @@ class AddNewUserActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-
         val datePicker = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                showTimePicker(selectedYear, selectedMonth, selectedDay)
+                // Handle date selection here
+                val selectedDate = "${selectedMonth + 1}/$selectedDay/$selectedYear"
+                binding.followUpDateEditText.setText(selectedDate)
             },
             year, month, day
         )
-
         datePicker.show()
     }
-
-    private fun showTimePicker(year: Int, month: Int, day: Int) {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        val timePicker = TimePickerDialog(
-            this,
-            { _, _, _ ->
-                val formattedDate = "${month + 1}/$day/$year"
-                binding.planTo.setText(formattedDate)
-            },
-            hour, minute, false
-        )
-
-        timePicker.show()
-    }
-
 }

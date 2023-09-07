@@ -39,16 +39,6 @@ class ForgetActivity : AppCompatActivity() {
                 sendPasswordResetEmail(email)
             }
         }
-
-//        changePasswordButton.setOnClickListener {
-//            val newPassword = newPasswordEditText.text.toString()
-//
-//            if (newPassword.isEmpty()) {
-//                Toast.makeText(this, "Please enter a new password.", Toast.LENGTH_SHORT).show()
-//            } else {
-//                changePassword(newPassword)
-//            }
-//        }
     }
 
     private fun sendPasswordResetEmail(email: String) {
@@ -64,16 +54,4 @@ class ForgetActivity : AppCompatActivity() {
                 }
             }
     }
-
-//    private fun changePassword(newPassword: String) {
-//        val user = auth.currentUser
-//        user?.updatePassword(newPassword)
-//            ?.addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    Toast.makeText(this, "Password changed successfully.", Toast.LENGTH_SHORT).show()
-//                } else {
-//                    Toast.makeText(this, "Failed to change password.", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//    }
 }

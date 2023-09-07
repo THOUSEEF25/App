@@ -19,7 +19,6 @@ class FollowupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFollowupBinding
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var db: FirebaseFirestore
-    private lateinit var userList: List<User>
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +45,7 @@ class FollowupActivity : AppCompatActivity() {
                     userList.add(user)
                 }
 
-                val userAdapter = UserAdapter(userList, db)
+                val userAdapter = UserAdapter(userList)
                 userRecyclerView.adapter = userAdapter
             }
             .addOnFailureListener { exception ->

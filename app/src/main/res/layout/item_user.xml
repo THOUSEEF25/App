@@ -1,52 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:elevation="10dp"-->
-<!--    app:cardCornerRadius="10dp"-->
-<!--    android:layout_margin="16dp"-->
-<!--    android:orientation="horizontal"-->
-<!--    android:padding="16dp"-->
-<!--    android:background="@color/colorPrimary">-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/nameTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text=""-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_marginHorizontal="10dp"-->
-<!--        android:layout_weight="1"/>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/phoneTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text=""-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_weight="1"/>-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/statusSpinner"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#FDD835"-->
-<!--        android:layout_weight="1" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/followUpDateTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text=""-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_weight="1"/>-->
-
-<!--</LinearLayout>-->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -54,8 +6,7 @@
     android:background="@color/colorPrimary"
     android:id="@+id/listView"
     android:orientation="horizontal"
-    android:padding="10dp"
-    android:layout_margin="10dp">
+    android:padding="8dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="120dp"

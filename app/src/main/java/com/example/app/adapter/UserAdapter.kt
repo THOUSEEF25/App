@@ -12,37 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.app.R
 import com.example.app.activity.EditUserActivity
 import com.example.app.model.User
-import com.google.firebase.firestore.FirebaseFirestore
 
-
-//class UserAdapter(private val userList: List<User>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-//        return ViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val user = userList[position]
-//        holder.nameTextView.text =user.name
-//        holder.phoneTextView.text = user.phone
-//        holder.followUpDateTextView.text = user.followUpDate
-//
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return userList.size
-//    }
-//
-//    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-//        val phoneTextView: TextView = itemView.findViewById(R.id.phoneTextView)
-//        val followUpDateTextView: TextView = itemView.findViewById(R.id.followUpDateTextView)
-//    }
-//}
-
-
-class UserAdapter(private var userList: MutableList<User>, private val db: FirebaseFirestore) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(private var userList: MutableList<User>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
