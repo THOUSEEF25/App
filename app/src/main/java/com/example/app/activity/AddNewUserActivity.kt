@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.app.R
 import com.example.app.databinding.ActivityAddNewUserBinding
 import com.example.app.model.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +17,7 @@ class AddNewUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNewUserBinding
     private lateinit var db: FirebaseFirestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +85,6 @@ class AddNewUserActivity : AppCompatActivity() {
         val datePicker = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                // After the date is selected, show the time picker
                 showTimePickerDialog(selectedYear, selectedMonth, selectedDay)
             },
             year, month, day
@@ -101,28 +100,14 @@ class AddNewUserActivity : AppCompatActivity() {
 
         val timePicker = TimePickerDialog(
             this,
-            { _, selectedHour, selectedMinute ->
-                // Format the selected date and time
-                val formattedDate = "${month + 1}/$day/$year"
-                val formattedTime = format12HourTime(selectedHour, selectedMinute)
-                val dateTime = "$formattedDate $formattedTime"
-
-                // Set the formatted date and time to the appropriate TextView or EditText
+            { _, _, _ ->
+                val dateTime = "${month + 1}/$day/$year"
                 binding.followUpDateEditText.setText(dateTime)
             },
-            hour, minute, false // false for 12-hour format
+            hour, minute, false
         )
 
         timePicker.show()
-    }
-
-    private fun format12HourTime(hourOfDay: Int, minute: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        calendar.set(Calendar.MINUTE, minute)
-
-        val simpleDateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return simpleDateFormat.format(calendar.time)
     }
 
     private fun planTo() {
@@ -135,7 +120,6 @@ class AddNewUserActivity : AppCompatActivity() {
         val datePicker = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                // After the date is selected, show the time picker
                 showTimePicker(selectedYear, selectedMonth, selectedDay)
             },
             year, month, day
@@ -151,28 +135,14 @@ class AddNewUserActivity : AppCompatActivity() {
 
         val timePicker = TimePickerDialog(
             this,
-            { _, selectedHour, selectedMinute ->
-                // Format the selected date and time
+            { _, _, _ ->
                 val formattedDate = "${month + 1}/$day/$year"
-                val formattedTime = format12(selectedHour, selectedMinute)
-                val dateTime = "$formattedDate $formattedTime"
-
-                // Set the formatted date and time to the appropriate TextView or EditText
-                binding.planTo.setText(dateTime)
+                binding.planTo.setText(formattedDate)
             },
-            hour, minute, false // false for 12-hour format
+            hour, minute, false
         )
 
         timePicker.show()
-    }
-
-    private fun format12(hourOfDay: Int, minute: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        calendar.set(Calendar.MINUTE, minute)
-
-        val simpleDateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return simpleDateFormat.format(calendar.time)
     }
 
 }

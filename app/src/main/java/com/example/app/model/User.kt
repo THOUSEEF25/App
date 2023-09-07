@@ -3,13 +3,14 @@ package com.example.app.model
 import java.io.Serializable
 
 data class User(
-    val name: String = "",
-    val email: String = "",
-    val phone: String = "",
-    val address: String = "",
-    val followUpDate: String = "",
-    val planTo: String = "",
-    val description: String = ""
+    var name: String = "",
+    var email: String = "",
+    var phone: String = "",
+    var address: String = "",
+    var followUpDate: String = "",
+    var planTo: String = "",
+    var description: String = ""
 ) : Serializable {
+    val documentId: String = ""
     var status: String = ""
 }

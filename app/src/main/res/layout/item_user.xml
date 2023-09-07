@@ -52,6 +52,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
+    android:id="@+id/listView"
     android:orientation="horizontal"
     android:padding="10dp"
     android:layout_margin="10dp">

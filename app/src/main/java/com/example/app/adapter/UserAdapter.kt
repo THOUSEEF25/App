@@ -1,17 +1,18 @@
 package com.example.app.adapter
 
-import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.app.R
+import com.example.app.activity.EditUserActivity
 import com.example.app.model.User
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 //class UserAdapter(private val userList: List<User>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
@@ -41,40 +42,33 @@ import com.example.app.model.User
 //}
 
 
-class UserAdapter(private val context: Context, private val userList: List<User>) : BaseAdapter() {
+class UserAdapter(private var userList: MutableList<User>, private val db: FirebaseFirestore) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    override fun getCount(): Int {
-        return userList.size
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        val phoneTextView: TextView = itemView.findViewById(R.id.phoneTextView)
+        val followupDateTextView: TextView = itemView.findViewById(R.id.followUpDateTextView)
+        val statusSpinner: Spinner = itemView.findViewById(R.id.statusSpinner)
     }
 
-    override fun getItem(position: Int): Any {
-        return userList[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+        return ViewHolder(itemView)
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = userList[position]
-        val inflater = LayoutInflater.from(context)
-        val itemView = inflater.inflate(R.layout.item_user, parent, false)
 
-        val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
-        val phoneTextView = itemView.findViewById<TextView>(R.id.phoneTextView)
-        val followupDateTextView = itemView.findViewById<TextView>(R.id.followUpDateTextView)
-        val statusSpinner = itemView.findViewById<Spinner>(R.id.statusSpinner)
-
-        nameTextView.text = user.name
-        phoneTextView.text = user.phone
-        followupDateTextView.text = user.followUpDate
+        holder.nameTextView.text = user.name
+        holder.phoneTextView.text = user.phone
+        holder.followupDateTextView.text = user.followUpDate
 
         val statusArray = arrayOf("Followup", "Drop", "Hold", "Win")
-        val statusAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, statusArray)
+        val statusAdapter = ArrayAdapter(holder.itemView.context, android.R.layout.simple_spinner_item, statusArray)
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        statusSpinner.adapter = statusAdapter
+        holder.statusSpinner.adapter = statusAdapter
 
-        statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        holder.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 val selectedStatus = statusArray[pos]
                 user.status = selectedStatus
@@ -83,6 +77,16 @@ class UserAdapter(private val context: Context, private val userList: List<User>
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        return itemView
+        // Set click listeners for edit and delete buttons
+        holder.itemView.setOnClickListener {
+            // Handle item click - Open update activity with user's data
+            val intent = Intent(holder.itemView.context, EditUserActivity::class.java)
+            intent.putExtra("editUser", user)
+            holder.itemView.context.startActivity(intent)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return userList.size
     }
 }
